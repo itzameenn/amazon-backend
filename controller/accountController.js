@@ -38,7 +38,7 @@ export const loginUser = async(req,res)=>{
             const token=jwt.sign({email:usr.email}, process.env.JWT_SECRET, { expiresIn: '24h' });
 
 
-            res.status(200).json({token})
+            res.status(200).json({token, user: usr})
         }else{
             res.status(401).send("wrong password")
         }

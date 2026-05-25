@@ -16,3 +16,38 @@ export const createOrder = async (req, res) => {
         })
     }
 }
+
+export const getOrders = async (req, res) => {
+    try{
+        const orders = await Order.find().sort({ createdAt: -1 })
+        
+        res.json(orders)
+
+    } catch(err) {
+        res.status(500).send("Server Error")
+    }
+}
+
+export const updateOrderStatus = async (req, res) => {
+
+  try {
+
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: req.body.status
+      },
+      {
+        new: true
+      }
+    )
+
+    res.json(updatedOrder)
+
+  } catch (err) {
+
+    res.status(500).send("Server Error")
+
+  }
+
+}
