@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+
+  ram: [String],
+  storage: [String],
+  sizes: [String]
 })
 
 export default mongoose.model("Product", productSchema)
