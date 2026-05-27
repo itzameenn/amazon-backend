@@ -61,14 +61,17 @@ export const getProductsByCategory = async(req,res)=>{
 
 export const addProduct = async (req,res)=>{
     try{
-        const {name, price, offerPrice, imageURL,category} = req.body
+        const {name, price, offerPrice, imageURL,category, ram, storage, sizes} = req.body
 
         await Product.create({
             name,
             price,
             offerPrice,
             imageURL,
-            category
+            category,
+            ram,
+            storage,
+            sizes
         })
 
         res.send("Product Added")
