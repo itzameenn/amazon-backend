@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 
 export const getUsers = async (req,res)=>{
     
-    const users = await Account.find({email: req.user.email})
+    const users = await Account.find()
     res.json(users)
 }
 
@@ -19,7 +19,8 @@ export const registerUser = async (req, res) => {
 
     await Account.create({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        role: "user"
     })
 
     res.send("received")
@@ -35,7 +36,12 @@ export const loginUser = async(req,res)=>{
    
     if(usr){
         if(usr.password==password){
-            const token=jwt.sign({email:usr.email}, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+const token = jwt.sign(
+  { email: usr.email, role: usr.role },
+  process.env.JWT_SECRET,
+  { expiresIn: "24h" }
+)
 
 
             res.status(200).json({token, user: usr})

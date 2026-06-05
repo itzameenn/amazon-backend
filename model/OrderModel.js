@@ -20,6 +20,13 @@ const orderSchema = new mongoose.Schema({
 
     totalPrice: Number,
 
+    paymentStatus: {
+  type: String,
+  default: "paid"
+},
+
+cashfreeOrderId: String,
+
     status: {
         type: String,
         default: "pending"
